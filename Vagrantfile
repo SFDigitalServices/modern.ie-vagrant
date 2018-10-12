@@ -46,12 +46,10 @@ list_vms=`vagrant box list`
 vm_name="modern.ie/#{VM}"
 if !list_vms.include? vm_name
   puts "=> Missing #{vm_name}, downloading..."
-  if VM=="msedge.win10.vagrant"
-    url="https://vagrantcloud.com/Microsoft/boxes/EdgeOnWindows10/versions/1.0/providers/virtualbox.box"
-  else
-    url="http://aka.ms/#{VM}"
-  end
-  system "wget --no-check-certificate --output-document=/tmp/#{VM}.zip #{url}"
+  url="http://aka.ms/#{VM}"
+  puts "url: #{url}"
+#  system "wget --no-check-certificate --output-document=/tmp/#{VM}.zip #{url}"
+  system "curl -k -L -o /tmp/#{VM}.zip #{url}"
   puts "=> Extracting image '#{VM}'..."
   system "unzip -d /tmp/#{VM} /tmp/#{VM}.zip"
   puts "=> Importing the box '#{vm_name}'..."
@@ -64,7 +62,8 @@ end
 
 
 # install plugins
-required_plugins = %w( winrm rdp )
+#required_plugins = %w( winrm rdp )
+required_plugins = %w( rdp )
 required_plugins.each do |plugin|
   unless Vagrant.has_plugin? plugin
     system "vagrant plugin install #{plugin}"
@@ -85,10 +84,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "modern.ie/#{VM}"
 
   ## Shares
-  config.vm.synced_folder "~/tmp", "/tmp", disabled: false
-  config.vm.synced_folder "~/tools", "/tools", disabled: false
-  config.vm.synced_folder "~/ctf", "/ctf", disabled: false
-  config.vm.synced_folder "~/symbols", "/symbols", disabled: false
+#  config.vm.synced_folder "~/tmp", "/tmp", disabled: false
+#  config.vm.synced_folder "~/tools", "/tools", disabled: false
+#  config.vm.synced_folder "~/ctf", "/ctf", disabled: false
+#  config.vm.synced_folder "~/symbols", "/symbols", disabled: false
   
   ## System
   config.vm.guest = :windows
