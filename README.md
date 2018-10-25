@@ -28,7 +28,7 @@ That's it!!
 
 ## SFDS notes
 ```bash
-git clone git@github.com:SFDigitalServices/modern.ie-vagrant.git
+git clone git@github.com:SFDigitalServices/modern.ie-vagrant.git win7
 cd win7 && FIRSTBOOT=1 vagrant up
 ```
 You only need FIRSTBOOT=1 when running for the first time.
