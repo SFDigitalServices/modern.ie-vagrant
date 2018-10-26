@@ -27,6 +27,13 @@ That's it!!
 
 
 ## SFDS notes
+
+##### Prerequisites
+[VirtualBox](https://www.virtualbox.org/)
+[Vagrant](https://downloads.vagrantup.com)
+***
+
+Open Terminal and run:
 ```bash
 git clone git@github.com:SFDigitalServices/modern.ie-vagrant.git win7
 cd win7 && FIRSTBOOT=1 vagrant up
